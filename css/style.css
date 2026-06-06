@@ -23,6 +23,7 @@ box-sizing:border-box;
 html{
 scroll-behavior:smooth;
 }
+
 body{
 background:var(--black);
 color:white;
@@ -30,7 +31,6 @@ font-family:'Thunder',sans-serif;
 overflow-x:hidden;
 position:relative;
 }
-
 
 
 /* Menu */
@@ -282,16 +282,28 @@ font-size:1rem;
 
 .hero{
 padding:20px;
+font-family:'Gorewild';
+font-size:1rem;
+letter-spacing:4px;
+color:var(--pink);
 }
 
 .hero h1{
 font-size:clamp(3rem,18vw,6rem);
 letter-spacing:8px;
+font-family:'Gorewild';
+font-size:1rem;
+letter-spacing:4px;
+color:var(--pink);
 }
 
 .hero p{
 font-size:.9rem;
 letter-spacing:2px;
+font-family:'Gorewild';
+font-size:1rem;
+letter-spacing:4px;
+color:var(--pink);
 }
 
 .scroll{
@@ -318,6 +330,10 @@ letter-spacing:2px;
 .text{
 font-size:1rem;
 line-height:1.7;
+font-family:'Gorewild';
+font-size:1rem;
+letter-spacing:4px;
+color:var(--pink);
 }
 
 .event{
