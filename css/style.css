@@ -157,10 +157,10 @@ color:var(--pink);
 
 .vinyl{
 position:fixed;
-left:-100px;
+left:-400px;
 top:50%;
-width:220px;
-height:220px;
+width:820px;
+height:820px;
 transform:translateY(-50%);
 background-image:url("../disco.png");
 background-size:contain;
