@@ -1,6 +1,6 @@
 @font-face{
     font-family:'Gorewild';
-    src:url('./fonts/TrustParade-Regular.ttf') format('truetype');
+    src:url('../fonts/TrustParade-Regular.ttf') format('truetype');
 }
 
 @font-face{
@@ -48,7 +48,7 @@ align-items:center;
 z-index:9999;
 }
 .logo{
-font-family:'Thunder';
+font-family:'Gorewild';
 font-size:1rem;
 letter-spacing:4px;
 color:var(--pink);
