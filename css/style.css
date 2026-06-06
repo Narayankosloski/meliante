@@ -172,7 +172,6 @@ z-index:1;
 }
 
 
-
 .hero,
 section,
 footer{
@@ -300,8 +299,8 @@ font-size:.7rem;
 }
 
 .vinyl{
-width:850px;
-height:850px;
+width:550px;
+height:550px;
 left:-420px;
 top:50%;
 opacity:.25;
