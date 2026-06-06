@@ -360,3 +360,63 @@ line-height:1.8;
 }
 
 }
+@media (max-width:768px){
+
+    .dj-fader{
+        display:none;
+    }
+
+}
+
+/* Esconde scrollbar padrão */
+
+::-webkit-scrollbar{
+    width:0;
+}
+
+html{
+    scrollbar-width:none;
+}
+
+/* Fader DJ */
+
+.dj-fader{
+    position:fixed;
+    right:30px;
+    top:50%;
+    transform:translateY(-50%);
+    height:300px;
+    z-index:9998;
+    pointer-events:none;
+}
+
+.fader-track{
+    width:8px;
+    height:100%;
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
+    position:relative;
+}
+
+.fader-knob{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    
+    width:40px;
+    height:22px;
+
+    border-radius:4px;
+
+    background:linear-gradient(
+        180deg,
+        #ff0088,
+        #5B21B6
+    );
+
+    box-shadow:
+    0 0 15px rgba(255,0,136,.5),
+    0 0 30px rgba(91,33,182,.4);
+
+    top:0;
+}
