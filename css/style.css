@@ -325,6 +325,96 @@ line-height:2;
 
 
 
+.highlight-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:30px;
+}
+
+.highlight-card{
+    position:relative;
+    overflow:hidden;
+
+    height:450px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+}
+
+.highlight-card img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.highlight-card:hover img{
+    transform:scale(1.08);
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    padding:30px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.95)
+    );
+}
+
+.overlay h3{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.overlay p{
+    color:#ccc;
+    margin-bottom:20px;
+}
+
+audio{
+    width:100%;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+
+    opacity:0.80;
+
+    box-shadow:
+        0 0 20px rgba(255,0,136,0.15);
+
+    overflow:hidden;
+}
+
+audio::-webkit-media-controls-panel{
+    background:rgba(17,17,17,0.6);
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display{
+    color:white;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button{
+    filter:invert(1);
+}
+
+
+
+
 @media (max-width:768px){
 
 
