@@ -1,61 +1,38 @@
 const vinyl = document.querySelector('.vinyl');
 const about = document.getElementById('text');
 
-const btnLang = document.getElementById('langBtn');
 const pt = document.getElementById('about-pt');
 const en = document.getElementById('about-en');
 
 let currentLang = 'pt';
 let canTranslate = false;
+let lastState = false;
 
-window.addEventListener('scroll', () => {
+function updateVinyl() {
 
-    const scroll = window.scrollY;
+    if (!canTranslate) {
 
-    vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+        vinyl.style.backgroundImage =
+            "url('./disco.png')";
 
-    const rect = about.getBoundingClientRect();
+    } else if (currentLang === 'pt') {
 
-    const insideAbout =
-        rect.top < window.innerHeight * 0.6 &&
-        rect.bottom > window.innerHeight * 0.4;
-
-    if (insideAbout) {
-
-        canTranslate = true;
-
-        vinyl.style.zIndex = '100';
-        vinyl.style.cursor = 'pointer';
+        vinyl.style.backgroundImage =
+            "url('./disco_rosa_pt.png')";
 
     } else {
 
-        canTranslate = false;
-
-        vinyl.style.zIndex = '1';
-        vinyl.style.cursor = 'default';
+        vinyl.style.backgroundImage =
+            "url('./disco_rosa_en.png')";
     }
+}
 
-});
+function toggleLanguage() {
 
-vinyl.addEventListener('click', () => {
-
-    if (!canTranslate) return;
-
-    toggleLanguage();
-
-});
-
-function toggleLanguage(){
-
-    if(currentLang === 'pt'){
+    if (currentLang === 'pt') {
 
         pt.style.display = 'none';
         en.style.display = 'block';
-
-        if(btnLang){
-            btnLang.textContent = 'PORTUGUÊS';
-        }
 
         currentLang = 'en';
 
@@ -64,10 +41,46 @@ function toggleLanguage(){
         pt.style.display = 'block';
         en.style.display = 'none';
 
-        if(btnLang){
-            btnLang.textContent = 'ENGLISH';
-        }
-
         currentLang = 'pt';
     }
+
+    updateVinyl();
 }
+
+window.addEventListener('scroll', () => {
+
+    const scroll = window.scrollY;
+
+    vinyl.style.transform =
+        `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+
+    const rect = about.getBoundingClientRect();
+    const center = window.innerHeight / 2;
+
+    const insideAbout =
+        rect.top < center &&
+        rect.bottom > center;
+
+    if (insideAbout !== lastState) {
+
+        lastState = insideAbout;
+        canTranslate = insideAbout;
+
+        vinyl.style.zIndex =
+            insideAbout ? '10' : '1';
+
+        vinyl.style.cursor =
+            insideAbout ? 'pointer' : 'default';
+
+        updateVinyl();
+    }
+});
+
+vinyl.addEventListener('click', () => {
+
+    if (!canTranslate) return;
+
+    toggleLanguage();
+});
+
+updateVinyl();
