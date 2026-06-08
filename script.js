@@ -8,23 +8,43 @@ let currentLang = 'pt';
 let canTranslate = false;
 let lastState = false;
 
-function updateVinyl(){
+function updateVinyl() {
 
-    if(!canTranslate){
-
-        vinyl.style.backgroundImage =
-        "url('./disco.png')";
-
-    }else if(currentLang === 'pt'){
+    if (!canTranslate) {
 
         vinyl.style.backgroundImage =
-        "url('./disco_rosa_pt.png')";
+            "url('./disco.png')";
 
-    }else{
+    } else if (currentLang === 'pt') {
 
         vinyl.style.backgroundImage =
-        "url('./disco_rosa_en.png')";
+            "url('./disco_rosa_pt.png')";
+
+    } else {
+
+        vinyl.style.backgroundImage =
+            "url('./disco_rosa_en.png')";
     }
+}
+
+function toggleLanguage() {
+
+    if (currentLang === 'pt') {
+
+        pt.style.display = 'none';
+        en.style.display = 'block';
+
+        currentLang = 'en';
+
+    } else {
+
+        pt.style.display = 'block';
+        en.style.display = 'none';
+
+        currentLang = 'pt';
+    }
+
+    updateVinyl();
 }
 
 window.addEventListener('scroll', () => {
@@ -32,7 +52,7 @@ window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
 
     vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+        `translateY(-50%) rotate(${scroll * 0.35}deg)`;
 
     const rect = about.getBoundingClientRect();
     const center = window.innerHeight / 2;
@@ -41,77 +61,19 @@ window.addEventListener('scroll', () => {
         rect.top < center &&
         rect.bottom > center;
 
-    if(insideAbout !== lastState){
+    if (insideAbout !== lastState) {
 
         lastState = insideAbout;
         canTranslate = insideAbout;
 
         vinyl.style.zIndex =
-            insideAbout ? '100' : '1';
+            insideAbout ? '10' : '1';
 
         vinyl.style.cursor =
             insideAbout ? 'pointer' : 'default';
 
         updateVinyl();
     }
-
-});
-
-vinyl.addEventListener('click', () => {
-
-    if(!canTranslate) return;
-
-    if(currentLang === 'pt'){
-
-        pt.style.display = 'none';
-        en.style.display = 'block';
-
-        currentLang = 'en';
-
-    }else{
-
-        pt.style.display = 'block';
-        en.style.display = 'none';
-
-        currentLang = 'pt';
-    }
-
-    updateVinyl();
-});
-
-updateVinyl();
-window.addEventListener('scroll', () => {
-
-    const scroll = window.scrollY;
-
-    vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
-
-    const rect = about.getBoundingClientRect();
-
-    const center = window.innerHeight / 2;
-
-    const insideAbout =
-        rect.top < center &&
-        rect.bottom > center;
-
-    if (insideAbout) {
-
-        canTranslate = true;
-
-        vinyl.style.zIndex = '100';
-        vinyl.style.cursor = 'pointer';
-
-    } else {
-
-        canTranslate = false;
-
-        vinyl.style.zIndex = '1';
-        vinyl.style.cursor = 'default';
-    }
-
-    updateVinyl();
-
 });
 
 vinyl.addEventListener('click', () => {
@@ -119,60 +81,6 @@ vinyl.addEventListener('click', () => {
     if (!canTranslate) return;
 
     toggleLanguage();
-
 });
-
-function toggleLanguage(){
-
-    if(currentLang === 'pt'){
-
-        pt.style.display = 'none';
-        en.style.display = 'block';
-
-        currentLang = 'en';
-
-    } else {
-
-        pt.style.display = 'block';
-        en.style.display = 'none';
-
-        currentLang = 'pt';
-    }
-
-    updateVinyl();
-}
 
 updateVinyl();
-vinyl.addEventListener('click', () => {
-
-    if (!canTranslate) return;
-
-    toggleLanguage();
-
-});
-
-function toggleLanguage(){
-
-    if(currentLang === 'pt'){
-
-        pt.style.display = 'none';
-        en.style.display = 'block';
-
-        if(btnLang){
-            btnLang.textContent = 'PORTUGUÊS';
-        }
-
-        currentLang = 'en';
-
-    } else {
-
-        pt.style.display = 'block';
-        en.style.display = 'none';
-
-        if(btnLang){
-            btnLang.textContent = 'ENGLISH';
-        }
-
-        currentLang = 'pt';
-    }
-}

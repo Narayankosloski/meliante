@@ -104,9 +104,9 @@ opacity:.15;
 
 filter:
 grayscale(100%)
-contrast(120%);
+contrast(100%);
 
-z-index:0;
+z-index:1;
 }
 
 .hero::after{
@@ -126,11 +126,11 @@ z-index:0;
 
 .hero-content{
 position:relative;
-z-index:3;
+z-index:20;
 }
 
 .hero-content{
-z-index:3;
+z-index:20;
 }
 
 .hero h1{
@@ -161,26 +161,26 @@ color:var(--pink);
 
 /* Disco */
 .vinyl{
-position:fixed;
-left:-420px;
-top:50%;
-width:820px;
-height:820px;
-transform:translateY(-50%);
-background-image:url("../disco.png");
-background-size:contain;
-background-repeat:no-repeat;
-background-position:center;
-opacity:.75;
+    position:fixed;
+    left:-420px;
+    top:50%;
 
-user-select:none;
--webkit-user-drag:none;
+    width:890px;
+    height:890px;
 
-pointer-events:auto;
-z-index:1;
+    background-image:url("../disco.png");
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
 
+    opacity:.75;
 
+    pointer-events:auto;
+    z-index:20;
 
+    cursor:default;
+
+ 
 }
 .vinyl{
     transition:
@@ -195,12 +195,12 @@ z-index:1;
 section,
 footer{
 position:relative;
-z-index:3;
+z-index:1;
 }
 
 .hero-content{
 position:relative;
-z-index:2;
+z-index:20;
 }
 
 /* Seções */
@@ -407,6 +407,7 @@ letter-spacing:2px;
 
     pointer-events:none;
 }
+
 section{
 padding:80px 20px;
 }
@@ -512,3 +513,7 @@ html{
 
     top:0;
 }
+
+
+
+
