@@ -18,6 +18,8 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+
+-webkit-tap-highlight-color:transparent;
 }
 
 html{
@@ -30,8 +32,12 @@ color:white;
 font-family:'Thunder',sans-serif;
 overflow-x:hidden;
 position:relative;
-}
 
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
+}
 
 /* Menu */
 
@@ -167,6 +173,8 @@ background-repeat:no-repeat;
 background-position:center;
 opacity:.75;
 
+user-select:none;
+-webkit-user-drag:none;
 
 pointer-events:auto;
 z-index:1;
@@ -174,6 +182,13 @@ z-index:1;
 
 
 }
+.vinyl{
+    transition:
+        background-image .2s ease,
+        opacity .2s ease,
+        filter .2s ease;
+}
+
 
 
 .hero,
@@ -311,34 +326,53 @@ line-height:2;
 
 #text{
     display:block;
+    padding-top:40px;
 }
 
 #about-pt,
 #about-en{
-    max-width:650px;
+    max-width:100%;
     width:100%;
-    margin-left:35%;
+    margin-left:0;
 
-    font-size:1.2rem;
-    line-height:1.9;
+    font-size:1rem;
+    line-height:1.8;
+
+    padding:0;
 }
 
+#about-pt h2,
+#about-en h2{
+    font-size:2.5rem;
+    margin-bottom:20px;
+    text-align:left;
+}
+
+#about-pt p,
+#about-en p{
+    font-size:1rem;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+
+
 nav{
-padding:20px;
-flex-direction:column;
-gap:15px;
+    padding:15px;
+    flex-direction:column;
+    gap:10px;
 }
 
 .menu{
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
+    gap:10px;
 }
 
 .menu a{
-font-size:.95rem;
-letter-spacing:1px;
+    font-size:.85rem;
+
 }
+
+
 
 .logo{
 font-size:1.2rem;
@@ -349,12 +383,9 @@ padding:20px;
 }
 
 .hero h1{
-font-family:'Gorewild';
-font-size:clamp(3.5rem,18vw,6rem);
-letter-spacing:8px;
-line-height:.85;
+    font-size:clamp(3rem,15vw,5rem);
+    letter-spacing:4px;
 }
-
 .hero p{
 font-family:'Thunder';
 font-size:.9rem;
@@ -368,13 +399,14 @@ letter-spacing:2px;
 }
 
 .vinyl{
-width:850px;
-height:850px;
-left:-410px;
-top:50%;
-opacity:.20;
-}
+    width:500px;
+    height:500px;
+    left:-250px;
+    top:55%;
+    opacity:.12;
 
+    pointer-events:none;
+}
 section{
 padding:80px 20px;
 }
@@ -386,13 +418,11 @@ letter-spacing:2px;
 }
 
 .text{
-font-family:'Thunder';
-font-size:1rem;
-line-height:1.7;
-letter-spacing:0;
-color:#ddd;
-}
-
+    max-width:800px;
+    font-size:1.1rem;
+    line-height:1.8;
+    color:#ddd;
+}	
 .event{
 padding:20px;
 }
