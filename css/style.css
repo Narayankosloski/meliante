@@ -115,7 +115,7 @@ height:100%;
 
 background:rgba(0,0,0,.45);
 
-z-index:2;
+z-index:0;
 }
 
 .hero-content{
@@ -154,7 +154,6 @@ color:var(--pink);
 }
 
 /* Disco */
-
 .vinyl{
 position:fixed;
 left:-420px;
@@ -167,8 +166,13 @@ background-size:contain;
 background-repeat:no-repeat;
 background-position:center;
 opacity:.75;
-pointer-events:none;
+
+
+pointer-events:auto;
 z-index:1;
+
+
+
 }
 
 
@@ -176,12 +180,12 @@ z-index:1;
 section,
 footer{
 position:relative;
-z-index:2;
+z-index:3;
 }
 
 .hero-content{
 position:relative;
-z-index:3;
+z-index:2;
 }
 
 /* Seções */
@@ -198,15 +202,40 @@ text-transform:uppercase;
 color:var(--pink);
 letter-spacing:4px;
 }
+
 .text{
 max-width:800px;
-font-size:1.1rem;
-line-height:1.8;
+font-size:5rem;
+line-height:5s;
 color:#ddd;
 }
 
 /* Agenda */
+/* ABOUT */
 
+#text{
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+}
+
+#about-pt,
+#about-en{
+    max-width:650px;
+    width:100%;
+    margin-left:35%;
+
+    font-size:1.2rem;
+    line-height:1.9;
+}
+
+#text h2{
+    margin-bottom:30px;
+}
+
+#text p{
+    margin-bottom:25px;
+}
 .events{
 display:grid;
 gap:25px;
@@ -262,7 +291,37 @@ font-size:1.1rem;
 line-height:2;
 }
 
+.vinyl{
+    cursor:pointer;
+}
+
+.lang-active{
+    cursor:pointer !important;
+
+    box-shadow:
+    0 0 30px rgba(255,0,136,.5),
+    0 0 60px rgba(91,33,182,.4);
+}
+
+
+
+
 @media (max-width:768px){
+
+
+#text{
+    display:block;
+}
+
+#about-pt,
+#about-en{
+    max-width:650px;
+    width:100%;
+    margin-left:35%;
+
+    font-size:1.2rem;
+    line-height:1.9;
+}
 
 nav{
 padding:20px;
@@ -360,6 +419,9 @@ line-height:1.8;
 }
 
 }
+
+
+
 @media (max-width:768px){
 
     .dj-fader{

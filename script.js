@@ -1,4 +1,12 @@
 const vinyl = document.querySelector('.vinyl');
+const about = document.getElementById('text');
+
+const btnLang = document.getElementById('langBtn');
+const pt = document.getElementById('about-pt');
+const en = document.getElementById('about-en');
+
+let currentLang = 'pt';
+let canTranslate = false;
 
 window.addEventListener('scroll', () => {
 
@@ -7,24 +15,61 @@ window.addEventListener('scroll', () => {
     vinyl.style.transform =
     `translateY(-50%) rotate(${scroll * 0.35}deg)`;
 
+const rect = about.getBoundingClientRect();
+
+const center = window.innerHeight / 2;
+
+const insideAbout =
+    rect.top < center &&
+    rect.bottom > center;
+
+    if (insideAbout) {
+
+        canTranslate = true;
+
+        vinyl.style.zIndex = '100';
+        vinyl.style.cursor = 'pointer';
+
+    } else {
+
+        canTranslate = false;
+
+        vinyl.style.zIndex = '1';
+        vinyl.style.cursor = 'default';
+    }
+
 });
 
+vinyl.addEventListener('click', () => {
 
-const knob = document.querySelector('.fader-knob');
+    if (!canTranslate) return;
 
-window.addEventListener('scroll', () => {
-
-    const scrollTop = window.scrollY;
-
-    const docHeight =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
-
-    const percent = scrollTop / docHeight;
-
-    const trackHeight = 278;
-
-    knob.style.top =
-    `${percent * trackHeight}px`;
+    toggleLanguage();
 
 });
+
+function toggleLanguage(){
+
+    if(currentLang === 'pt'){
+
+        pt.style.display = 'none';
+        en.style.display = 'block';
+
+        if(btnLang){
+            btnLang.textContent = 'PORTUGUÊS';
+        }
+
+        currentLang = 'en';
+
+    } else {
+
+        pt.style.display = 'block';
+        en.style.display = 'none';
+
+        if(btnLang){
+            btnLang.textContent = 'ENGLISH';
+        }
+
+        currentLang = 'pt';
+    }
+}
