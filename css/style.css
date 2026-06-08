@@ -166,7 +166,7 @@ background-image:url("../disco.png");
 background-size:contain;
 background-repeat:no-repeat;
 background-position:center;
-opacity:.2;
+opacity:.75;
 pointer-events:none;
 z-index:1;
 }
