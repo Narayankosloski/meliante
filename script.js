@@ -6,37 +6,36 @@ const en = document.getElementById('about-en');
 
 let currentLang = 'pt';
 let canTranslate = false;
-let lastState = false;
 
-function updateVinyl() {
+function updateVinyl(){
 
-    if (!canTranslate) {
-
-        vinyl.style.backgroundImage =
-            "url('./disco.png')";
-
-    } else if (currentLang === 'pt') {
+    if(!canTranslate){
 
         vinyl.style.backgroundImage =
-            "url('./disco_rosa_pt.png')";
+        "url('./disco.png')";
 
-    } else {
+    }else if(currentLang === 'pt'){
 
         vinyl.style.backgroundImage =
-            "url('./disco_rosa_en.png')";
+        "url('./disco_rosa_pt.png')";
+
+    }else{
+
+        vinyl.style.backgroundImage =
+        "url('./disco_rosa_en.png')";
     }
 }
 
-function toggleLanguage() {
+function toggleLanguage(){
 
-    if (currentLang === 'pt') {
+    if(currentLang === 'pt'){
 
         pt.style.display = 'none';
         en.style.display = 'block';
 
         currentLang = 'en';
 
-    } else {
+    }else{
 
         pt.style.display = 'block';
         en.style.display = 'none';
@@ -47,40 +46,35 @@ function toggleLanguage() {
     updateVinyl();
 }
 
-window.addEventListener('scroll', () => {
+function updateScrollState(){
 
     const scroll = window.scrollY;
 
     vinyl.style.transform =
-        `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
 
     const rect = about.getBoundingClientRect();
-    const center = window.innerHeight / 2;
 
     const insideAbout =
-        rect.top < center &&
-        rect.bottom > center;
+        rect.top < window.innerHeight / 2 &&
+        rect.bottom > window.innerHeight / 2;
 
-    if (insideAbout !== lastState) {
+    canTranslate = insideAbout;
 
-        lastState = insideAbout;
-        canTranslate = insideAbout;
+    vinyl.style.cursor =
+        insideAbout ? 'pointer' : 'default';
 
-        vinyl.style.zIndex =
-            insideAbout ? '10' : '1';
+    vinyl.style.zIndex =
+        insideAbout ? '10' : '1';
 
-        vinyl.style.cursor =
-            insideAbout ? 'pointer' : 'default';
+    updateVinyl();
+}
 
-        updateVinyl();
-    }
-});
+window.addEventListener('scroll', updateScrollState);
 
-vinyl.addEventListener('click', () => {
+vinyl.addEventListener('click', toggleLanguage);
 
-    if (!canTranslate) return;
+pt.style.display = 'block';
+en.style.display = 'none';
 
-    toggleLanguage();
-});
-
-updateVinyl();
+updateScrollState();

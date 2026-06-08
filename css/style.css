@@ -168,6 +168,8 @@ color:var(--pink);
     width:890px;
     height:890px;
 
+    transform:translateY(-50%);
+
     background-image:url("../disco.png");
     background-size:contain;
     background-repeat:no-repeat;
@@ -175,12 +177,14 @@ color:var(--pink);
 
     opacity:.75;
 
-    pointer-events:auto;
     z-index:20;
 
     cursor:default;
 
- 
+    transition:
+        background-image .2s ease,
+        opacity .2s ease,
+        filter .2s ease;
 }
 .vinyl{
     transition:
