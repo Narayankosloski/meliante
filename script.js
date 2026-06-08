@@ -17,12 +17,12 @@ function updateVinyl(){
     }else if(currentLang === 'pt'){
 
         vinyl.style.backgroundImage =
-        "url('./disco_rosa_pt.png')";
+        "url('./disco_rosa_en.png')";
 
     }else{
 
         vinyl.style.backgroundImage =
-        "url('./disco_rosa_en.png')";
+        "url('./disco_rosa_pt.png')";
     }
 }
 
