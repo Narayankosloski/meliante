@@ -96,7 +96,7 @@ window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
 
     vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+    `translateY(-50%) rotate(${-scroll * 0.35}deg)`;
 
 });
 
@@ -171,7 +171,7 @@ function updateGalleryPhysics() {
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        const influenceRange = 19900;
+        const influenceRange = 900;
 
         let pushX = 0;
         let pushY = 0;
@@ -183,7 +183,7 @@ function updateGalleryPhysics() {
             // direção do empurrão (para longe do vinil)
             const angle = Math.atan2(dy, dx);
 
-            const strength = force * 120;
+            const strength = force * 200;
 
             pushX = Math.cos(angle) * strength;
             pushY = Math.sin(angle) * strength;
