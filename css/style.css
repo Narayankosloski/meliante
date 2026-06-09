@@ -1,12 +1,14 @@
 @font-face{
     font-family:'Gorewild';
-    src:url('../fonts/TrustParade-Regular.ttf') format('truetype');
+    src:url('../fonts/TrustParadeRegular-yYKge.ttf') format('truetype');
 }
 
 @font-face{
-    font-family:'Thunder';
-    src:url('./fonts/TThunder-BlackHC.otf') format('truetype');
+    font-family:'thunder';
+    src:url('../fonts/Thunder-BlackHC.otf') format('truetype');
 }
+
+
 :root{
 --black:#111111;
 --pink:#ff0088;
@@ -66,7 +68,7 @@ gap:40px;
 }
 
 .menu a{
-font-family:'Thunder';
+font-family:'Gorewild';
 text-decoration:none;
 color:white;
 font-size:1.2rem;
@@ -80,6 +82,7 @@ color:var(--pink);
 /* Hero */
 
 .hero{
+font-family:'Gorewild';
 height:100vh;
 display:flex;
 align-items:center;
@@ -135,10 +138,13 @@ z-index:60;
 
 .hero h1{
 font-family:'Gorewild';
+
 font-size:clamp(5rem,13vw,13rem);
 line-height:.8;
-letter-spacing:25px;
+letter-spacing:30px;
 text-transform:lowercase;
+
+
 
 text-shadow:
 0 0 15px rgba(255,0,136,.4),
@@ -271,6 +277,7 @@ letter-spacing:4px;
 }
 
 .text{
+font-family:'thunder';
 max-width:800px;
 font-size:5rem;
 line-height:5s;
@@ -281,9 +288,15 @@ color:#ddd;
 /* ABOUT */
 
 #text{
+font-family:'thunder';
     display:flex;
     justify-content:flex-end;
     align-items:flex-start;
+
+
+line-height:.8;
+letter-spacing:3px;
+text-transform:lowercase;
 }
 
 #about-pt,
