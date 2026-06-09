@@ -1,44 +1,108 @@
 const vinyl = document.querySelector('.vinyl');
-
 const about = document.getElementById('text');
+
+const btnLang = document.getElementById('langBtn');
 const pt = document.getElementById('about-pt');
 const en = document.getElementById('about-en');
 
 let currentLang = 'pt';
 let canTranslate = false;
 
-function updateVinyl(){
+/* =========================
+   TROCA A IMAGEM DO DISCO
+========================= */
 
-    if(!canTranslate){
+function updateVinyl() {
 
-        vinyl.style.backgroundImage =
-        "url('./disco.png')";
-
-    }else if(currentLang === 'pt'){
-
-        vinyl.style.backgroundImage =
-        "url('./disco_rosa_en.png')";
-
-    }else{
+    if (!canTranslate) {
 
         vinyl.style.backgroundImage =
-        "url('./disco_rosa_pt.png')";
+            "url('./disco.png')";
+
+    } else if (currentLang === 'pt') {
+
+        vinyl.style.backgroundImage =
+            "url('./disco_rosa_pt.png')";
+
+    } else {
+
+        vinyl.style.backgroundImage =
+            "url('./disco_rosa_en.png')";
     }
 }
 
-function toggleLanguage(){
+/* =========================
+   SCROLL
+========================= */
 
-    if(currentLang === 'pt'){
+window.addEventListener('scroll', () => {
+
+    const scroll = window.scrollY;
+
+    vinyl.style.transform =
+        `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+
+    const rect = about.getBoundingClientRect();
+const center = window.innerHeight / 2;
+
+const insideAbout =
+    rect.top < center + 0 &&
+    rect.bottom > center - 0;
+
+    if (insideAbout) {
+
+        canTranslate = true;
+
+        vinyl.style.zIndex = '60';
+        vinyl.style.cursor = 'pointer';
+
+    } else {
+
+        canTranslate = false;
+
+        vinyl.style.zIndex = '1';
+        vinyl.style.cursor = 'default';
+    }
+
+    updateVinyl();
+});
+
+/* =========================
+   CLICK NO DISCO
+========================= */
+
+vinyl.addEventListener('click', () => {
+
+    if (!canTranslate) return;
+
+    toggleLanguage();
+});
+
+/* =========================
+   TROCAR IDIOMA
+========================= */
+
+function toggleLanguage() {
+
+    if (currentLang === 'pt') {
 
         pt.style.display = 'none';
         en.style.display = 'block';
 
+        if (btnLang) {
+            btnLang.textContent = 'PORTUGUÊS';
+        }
+
         currentLang = 'en';
 
-    }else{
+    } else {
 
         pt.style.display = 'block';
         en.style.display = 'none';
+
+        if (btnLang) {
+            btnLang.textContent = 'ENGLISH';
+        }
 
         currentLang = 'pt';
     }
@@ -46,154 +110,8 @@ function toggleLanguage(){
     updateVinyl();
 }
 
-function updateScrollState(){
+/* =========================
+   INIT
+========================= */
 
-    if(!about) return;
-
-    const scroll = window.scrollY;
-
-    vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
-
-    const rect = about.getBoundingClientRect();
-
-    const insideAbout =
-        rect.top < window.innerHeight / 2 &&
-        rect.bottom > window.innerHeight / 2;
-
-    canTranslate = insideAbout;
-
-    vinyl.style.cursor =
-        insideAbout ? 'pointer' : 'default';
-
-    updateVinyl();
-}
-
-window.addEventListener('scroll', updateScrollState);
-
-vinyl.addEventListener('click', toggleLanguage);
-
-if(pt && en){
-
-    pt.style.display = 'block';
-    en.style.display = 'none';
-
-    updateScrollState();
-
-    window.addEventListener(
-        'scroll',
-        updateScrollState
-    );
-
-    vinyl.addEventListener(
-        'click',
-        toggleLanguage
-    );
-}
-
-window.addEventListener('scroll', () => {
-
-    const scroll = window.scrollY;
-
-    vinyl.style.transform =
-    `translateY(-50%) rotate(${scroll * 0.35}deg)`;
-
-});
-
-
-
-document.querySelectorAll('.highlight-card').forEach(card => {
-
-    const img = card.querySelector('.cover');
-    const audio = card.querySelector('audio');
-
-    img.addEventListener('click', () => {
-
-        if(audio.paused){
-            audio.play();
-        }else{
-            audio.pause();
-        }
-
-    });
-
-});
-
-
-
-
-const galleriaSection = document.getElementById('galleria');
-
-function updateVinylSide(){
-
-    if(!galleriaSection) return;
-
-    const rect = galleriaSection.getBoundingClientRect();
-
-    const middleScreen = window.innerHeight / 2;
-
-    const galleriaVisible =
-        rect.top < middleScreen &&
-        rect.bottom > middleScreen;
-
-    if(galleriaVisible){
-
-        vinyl.classList.add('right');
-
-    }else{
-
-        vinyl.classList.remove('right');
-    }
-}
-
-window.addEventListener('scroll', updateVinylSide);
-
-updateVinylSide();
-
-
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-function updateGalleryPhysics() {
-
-    const vinylRect = vinyl.getBoundingClientRect();
-    const vinylCenterX = vinylRect.left + vinylRect.width / 2;
-    const vinylCenterY = vinylRect.top + vinylRect.height / 2;
-
-    galleryItems.forEach(item => {
-
-        const rect = item.getBoundingClientRect();
-
-        const itemCenterX = rect.left + rect.width / 2;
-        const itemCenterY = rect.top + rect.height / 2;
-
-        const dx = itemCenterX - vinylCenterX;
-        const dy = itemCenterY - vinylCenterY;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        const influenceRange = 19900;
-
-        let pushX = 0;
-        let pushY = 0;
-
-        if (distance < influenceRange) {
-
-            const force = 1 - (distance / influenceRange);
-
-            // direção do empurrão (para longe do vinil)
-            const angle = Math.atan2(dy, dx);
-
-            const strength = force * 120;
-
-            pushX = Math.cos(angle) * strength;
-            pushY = Math.sin(angle) * strength;
-        }
-
-        item.style.transform = `translate(${pushX}px, ${pushY}px)`;
-    });
-}
-
-window.addEventListener('scroll', updateGalleryPhysics);
-window.addEventListener('resize', updateGalleryPhysics);
-
-updateGalleryPhysics();
+updateVinyl();
