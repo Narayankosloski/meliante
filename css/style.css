@@ -478,6 +478,12 @@ audio::-webkit-media-controls-mute-button{
 
 @media (max-width:1200px){
 
+html,
+body{
+    overflow-x: hidden;
+    width: 100%;
+}
+
 
 #text{
     display:block;
