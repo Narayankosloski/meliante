@@ -253,7 +253,7 @@ color:var(--pink);
 section,
 footer{
 position:relative;
-z-index:20;
+z-index:50;
 }
 
 .hero-content{

@@ -110,7 +110,7 @@ window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
 
     vinyl.style.transform =
-        `translateY(-50%) rotate(${scroll * 0.35}deg)`;
+        `translateY(-50%) rotate(${-scroll * 0.35}deg)`;
 
     const rect = about.getBoundingClientRect();
 const center = window.innerHeight / 2;
