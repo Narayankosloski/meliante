@@ -7,6 +7,82 @@ const en = document.getElementById('about-en');
 let currentLang = 'pt';
 let canTranslate = false;
 
+const track = document.querySelector('.fader-track');
+const knob = document.querySelector('.fader-knob');
+
+let isDragging = false;
+
+function updateKnobFromScroll() {
+
+    if (isDragging) return;
+
+    const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const maxMove =
+        track.offsetHeight - knob.offsetHeight;
+
+    const progress =
+        maxScroll > 0 ? window.scrollY / maxScroll : 0;
+
+    knob.style.top = `${progress * maxMove}px`;
+}
+
+window.addEventListener('scroll', updateKnobFromScroll);
+
+knob.addEventListener('mousedown', (e) => {
+
+    isDragging = true;
+
+    e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+
+    if (!isDragging) return;
+
+    const rect = track.getBoundingClientRect();
+
+    let y =
+        e.clientY -
+        rect.top -
+        (knob.offsetHeight / 2);
+
+    const maxMove =
+        track.offsetHeight - knob.offsetHeight;
+
+    y = Math.max(0, Math.min(y, maxMove));
+
+    // move o knob
+    knob.style.top = `${y}px`;
+
+    // calcula porcentagem
+    const progress = y / maxMove;
+
+    // converte para scroll da página
+    const maxScroll =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+    window.scrollTo({
+        top: progress * maxScroll,
+        behavior: 'auto'
+    });
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+updateKnobFromScroll();
+
+
+
+
+
+
+
+
 function updateVinyl(){
 
     if(!canTranslate){
@@ -104,14 +180,16 @@ window.addEventListener('scroll', () => {
 
 document.querySelectorAll('.highlight-card').forEach(card => {
 
-    const img = card.querySelector('.cover');
+    const img = card.querySelector('img');
     const audio = card.querySelector('audio');
+
+    if (!img || !audio) return;
 
     img.addEventListener('click', () => {
 
-        if(audio.paused){
+        if (audio.paused) {
             audio.play();
-        }else{
+        } else {
             audio.pause();
         }
 
