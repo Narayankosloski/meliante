@@ -178,7 +178,7 @@ audios.forEach(audio => {
     let connected = false;
 
     audio.addEventListener('play', async () => {
-	console.log('TOCOU');
+	
 
         await audioContext.resume();
 
@@ -212,14 +212,19 @@ function animateBars() {
 
     analyser.getByteFrequencyData(data);
 
-    bars.forEach((bar, i) => {
+ bars.forEach((bar,i)=>{
 
-        const value = data[i] || 0;
+    const value = data[i] || 0;
 
-        bar.style.height =
-            `${10 + value * 0.4}px`;
+    bar.style.height =
+        `${10 + value * 0.4}px`;
 
-    });
+    const intensity = value / 255;
+
+    bar.style.background =
+        `hsl(${320 - intensity * 50},100%,60%)`;
+
+});
 
 }
 
