@@ -37,6 +37,34 @@ knob.addEventListener('mousedown', (e) => {
     e.preventDefault();
 });
 
+
+
+
+window.addEventListener('keydown', (e) => {
+
+    if (e.key === 'ArrowDown') {
+        window.scrollBy({
+            top: 100,
+            behavior: 'smooth'
+        });
+        updateFader();
+    }
+
+    if (e.key === 'ArrowUp') {
+        window.scrollBy({
+            top: -100,
+            behavior: 'smooth'
+        });
+        updateFader();
+    }
+
+});
+
+
+
+
+
+
 document.addEventListener('mousemove', (e) => {
 
     if (!isDragging) return;
@@ -137,6 +165,67 @@ const insideAbout =
     updateVinyl();
 });
 
+
+const bars = document.querySelectorAll('.bar');
+const audios = document.querySelectorAll('audio');
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+let analyser = null;
+
+audios.forEach(audio => {
+
+    let connected = false;
+
+    audio.addEventListener('play', async () => {
+	console.log('TOCOU');
+
+        await audioContext.resume();
+
+        if (!connected) {
+
+            const source =
+                audioContext.createMediaElementSource(audio);
+
+            analyser =
+                audioContext.createAnalyser();
+
+            analyser.fftSize = 128;
+
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+
+            connected = true;
+        }
+
+    });
+
+});
+function animateBars() {
+
+    requestAnimationFrame(animateBars);
+
+    if (!analyser) return;
+
+    const data =
+        new Uint8Array(analyser.frequencyBinCount);
+
+    analyser.getByteFrequencyData(data);
+
+    bars.forEach((bar, i) => {
+
+        const value = data[i] || 0;
+
+        bar.style.height =
+            `${10 + value * 0.4}px`;
+
+    });
+
+}
+
+animateBars();
+
+
 /* =========================
    CLICK NO DISCO
 ========================= */
@@ -147,6 +236,12 @@ vinyl.addEventListener('click', () => {
 
     toggleLanguage();
 });
+
+
+
+
+
+
 
 /* =========================
    TROCAR IDIOMA

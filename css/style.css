@@ -40,7 +40,50 @@ position:relative;
 -ms-user-select:none;
 user-select:none;
 }
+/*visualizer*/
 
+
+.visualizer{
+    position:fixed;
+    left:30px;
+    bottom:30px;
+    display:flex;
+    gap:6px;
+    z-index:999999;
+}
+
+.bar{
+    width:15px;
+    height:100px;
+    background:red;
+}
+
+
+
+.visualizer{
+    position:fixed;
+    left:30px;
+    bottom:30px;
+
+    display:flex;
+    align-items:flex-end;
+    gap:5px;
+
+    height:100px;
+
+    z-index:99999;
+}
+
+.bar{
+    width:8px;
+    height:20px;
+
+    background:#ff0088;
+
+    border-radius:20px;
+
+    box-shadow:0 0 10px #ff0088;
+}
 /* Menu */
 
 nav{
@@ -658,28 +701,21 @@ html{
 }
 
 .fader-track{
-    width: 14px;
-    height: 300px;
-    background: #222;
+    width: 6px;
+    height: 500px;
+    background: #000000;
     border-radius: 10px;
     position: relative;
 }
 
 .fader-knob{
-    width: 40px;
-    height: 22px;
-    background: #ddd;
-    border-radius: 6px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
-    z-index: 10;
-
-    box-shadow:
-        0 0 15px rgba(255,0,136,.5),
-        0 0 30px rgba(91,33,182,.4);
+    position:absolute;
+    width:150px;
+    height:150px;
+    object-fit:contain;
+    left:50%;
+    transform:translateX(-50%);
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-drag:none;
 }
