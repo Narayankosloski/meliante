@@ -201,30 +201,87 @@ audios.forEach(audio => {
     });
 
 });
-function animateBars() {
+const bars = document.querySelectorAll('.bar');
+const audios = document.querySelectorAll('audio');
+
+const audioContext =
+    new (window.AudioContext || window.webkitAudioContext)();
+
+let analyser = null;
+
+audios.forEach(audio => {
+
+    let connected = false;
+
+    audio.addEventListener('play', async () => {
+
+        await audioContext.resume();
+
+        if (!connected) {
+
+            const source =
+                audioContext.createMediaElementSource(audio);
+
+            analyser =
+                audioContext.createAnalyser();
+
+            analyser.fftSize = 256;
+
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+
+            connected = true;
+        }
+
+    });
+
+});
+
+
+function isAnyAudioPlaying(){
+
+    return [...audios].some(audio =>
+        !audio.paused &&
+        !audio.ended &&
+        audio.currentTime > 0
+    );
+
+}
+
+
+function animateBars(){
 
     requestAnimationFrame(animateBars);
 
-    if (!analyser) return;
+    const playing = isAnyAudioPlaying();
+
+    if(!playing || !analyser){
+
+        bars.forEach(bar=>{
+
+            bar.style.height = "0px";
+            bar.style.opacity = "0";
+
+        });
+
+        return;
+    }
 
     const data =
         new Uint8Array(analyser.frequencyBinCount);
 
     analyser.getByteFrequencyData(data);
 
- bars.forEach((bar,i)=>{
+    bars.forEach((bar,i)=>{
 
-    const value = data[i] || 0;
+        const value = data[i] || 0;
 
-    bar.style.height =
-        `${10 + value * 0.4}px`;
+        bar.style.opacity = "1";
 
-    const intensity = value / 255;
+        bar.style.height =
+            `${5 + value * 1.5}px`;
 
-    bar.style.background =
-        `hsl(${320 - intensity * 50},100%,60%)`;
-
-});
+    });
 
 }
 
