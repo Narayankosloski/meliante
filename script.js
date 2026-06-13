@@ -178,7 +178,7 @@ audios.forEach(audio => {
     let connected = false;
 
     audio.addEventListener('play', async () => {
-	
+	console.log('TOCOU');
 
         await audioContext.resume();
 
@@ -201,85 +201,23 @@ audios.forEach(audio => {
     });
 
 });
-const bars = document.querySelectorAll('.bar');
-const audios = document.querySelectorAll('audio');
-
-const audioContext =
-    new (window.AudioContext || window.webkitAudioContext)();
-
-let analyser = null;
-
-audios.forEach(audio => {
-
-    let connected = false;
-
-    audio.addEventListener('play', async () => {
-
-        await audioContext.resume();
-
-        if (!connected) {
-
-            const source =
-                audioContext.createMediaElementSource(audio);
-
-            analyser =
-                audioContext.createAnalyser();
-
-            analyser.fftSize = 256;
-
-            source.connect(analyser);
-            analyser.connect(audioContext.destination);
-
-            connected = true;
-        }
-
-    });
-
-});
-
-
-function isAnyAudioPlaying(){
-
-    return [...audios].some(audio =>
-        !audio.paused &&
-        !audio.ended &&
-        audio.currentTime > 0
-    );
-
-}
-
-
-function animateBars(){
+function animateBars() {
 
     requestAnimationFrame(animateBars);
 
-    const playing = isAnyAudioPlaying();
-
-    if(!playing || !analyser){
-
-        bars.forEach(bar=>{
-
-            bar.style.height = "0px";
-            bar.style.opacity = "0";
-
-        });
-
-        return;
-    }
+    if (!analyser) return;
 
     const data =
         new Uint8Array(analyser.frequencyBinCount);
 
     analyser.getByteFrequencyData(data);
 
-    bars.forEach((bar,i)=>{
+    bars.forEach((bar, i) => {
 
         const value = data[i] || 0;
 
-        bar.style.opacity = "1";
-
         bar.style.height =
-            `${5 + value * 1.5}px`;
+            `${10 + value * 0.4}px`;
 
     });
 

@@ -60,40 +60,29 @@ user-select:none;
 
 
 
-/* VISUALIZER GIGANTE */
 .visualizer{
     position:fixed;
-
-    left:0;
-    bottom:0;
-
-    width:100vw;
-    height:35vh;
+    left:30px;
+    bottom:30px;
 
     display:flex;
     align-items:flex-end;
+    gap:5px;
 
-    gap:1px;
+    height:100px;
 
-    z-index:5;
-
-    pointer-events:none;
+    z-index:99999;
 }
 
 .bar{
-    flex:1;
+    width:8px;
+    height:20px;
 
-    min-width:0;
+    background:#ff0088;
 
-    height:0;
+    border-radius:20px;
 
-    opacity:0;
-
-    background:white;
-
-    transition:
-        height .05s linear,
-        opacity .2s ease;
+    box-shadow:0 0 10px #ff0088;
 }
 /* Menu */
 
@@ -134,7 +123,12 @@ color:var(--pink);
 }
 
 /* Hero */
-
+.hero-logo{
+    width: min(1200px, 90vw);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 .hero{
 font-family:'Gorewild';
 height:100vh;
