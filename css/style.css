@@ -91,13 +91,59 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-padding:30px 60px;
+padding:70px 60px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 
 z-index:9999;
 }
+
+
+/* GALLERY HEADER */
+
+.gallery-header{
+    padding-top:20px;
+    text-align:center;
+
+    position:relative;
+    z-index:100;
+}
+
+.gallery-header .hero-logo{
+    width:min(1200px,80vw);
+    height:auto;
+
+    display:block;
+    margin:0 auto -150px auto;
+
+    position:relative;
+    z-index:100;
+}
+
+.gallery-header p{
+    margin-top:10px;
+    margin-bottom:8px;
+
+    font-family:'Thunder';
+    letter-spacing:4px;
+    color:var(--silver);
+
+    position:relative;
+    z-index:100;
+}
+
+.gallery-header .scroll{
+    position:relative;
+    z-index:100;
+}
+
+.gallery-header .scroll{
+    margin-top:0;
+}
+
+
+
 .logo{
 font-family:'Gorewild';
 font-size:1rem;
@@ -723,4 +769,28 @@ html{
     cursor:pointer;
     user-select:none;
     -webkit-user-drag:none;
+}
+
+
+@media (max-width:768px){
+
+    .gallery-header{
+        padding-top:120px;
+    }
+
+    .gallery-header .hero-logo{
+        width:95vw;
+        margin:0 auto -60px auto;
+    }
+
+    .gallery-header p{
+        font-size:.8rem;
+        letter-spacing:2px;
+    }
+
+    .gallery-header .scroll{
+        font-size:.7rem;
+        margin-top:5px;
+    }
+
 }
