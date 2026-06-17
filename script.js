@@ -166,9 +166,19 @@ const insideAbout =
 });
 
 
+const visualizer = document.querySelector('.visualizer');
+
+for(let i = 0; i < 126; i++){
+
+    const bar = document.createElement('div');
+
+    bar.className = 'bar';
+
+    visualizer.appendChild(bar);
+}
+
 const bars = document.querySelectorAll('.bar');
 const audios = document.querySelectorAll('audio');
-
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 let analyser = null;
@@ -178,27 +188,37 @@ audios.forEach(audio => {
     let connected = false;
 
     audio.addEventListener('play', async () => {
-	console.log('TOCOU');
 
-        await audioContext.resume();
+    console.log('TOCOU');
 
-        if (!connected) {
+    visualizer.classList.add('active');
 
-            const source =
-                audioContext.createMediaElementSource(audio);
+    await audioContext.resume();
 
-            analyser =
-                audioContext.createAnalyser();
+    if (!connected) {
 
-            analyser.fftSize = 128;
+        const source =
+            audioContext.createMediaElementSource(audio);
 
-            source.connect(analyser);
-            analyser.connect(audioContext.destination);
+        analyser =
+            audioContext.createAnalyser();
 
-            connected = true;
-        }
+        analyser.fftSize = 256;
 
-    });
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        connected = true;
+    }
+});
+
+audio.addEventListener('pause', () => {
+    visualizer.classList.remove('active');
+});
+
+audio.addEventListener('ended', () => {
+    visualizer.classList.remove('active');
+});
 
 });
 function animateBars() {
@@ -216,8 +236,14 @@ function animateBars() {
 
         const value = data[i] || 0;
 
-        bar.style.height =
-            `${10 + value * 0.4}px`;
+        const height = 5 + value * 1.8;
+
+bar.style.height = `${height}px`;
+
+bar.style.opacity = 0.3 + (value / 255);
+
+bar.style.filter =
+`drop-shadow(0 0 ${value/10}px #ff0088)`;
 
     });
 
