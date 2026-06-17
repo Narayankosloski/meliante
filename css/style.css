@@ -42,24 +42,6 @@ user-select:none;
 }
 /*visualizer*/
 
-
-.visualizer{
-    position:fixed;
-    left:30px;
-    bottom:30px;
-    display:flex;
-    gap:6px;
-    z-index:999999;
-}
-
-.bar{
-    width:15px;
-    height:100px;
-    background:red;
-}
-
-
-
 .visualizer{
     position:fixed;
     left:0;
