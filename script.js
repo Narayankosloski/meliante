@@ -238,7 +238,20 @@ vinyl.addEventListener('click', () => {
 });
 
 
+const audio = document.querySelector('audio');
+const visualizer = document.querySelector('.visualizer');
 
+audio.addEventListener('play', () => {
+    visualizer.classList.add('active');
+});
+
+audio.addEventListener('pause', () => {
+    visualizer.classList.remove('active');
+});
+
+audio.addEventListener('ended', () => {
+    visualizer.classList.remove('active');
+});
 
 
 

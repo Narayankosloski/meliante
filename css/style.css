@@ -62,28 +62,40 @@ user-select:none;
 
 .visualizer{
     position:fixed;
-    left:30px;
-    bottom:30px;
+    left:0;
+    bottom:0;
+
+    width:100vw;
+    height:150px;
 
     display:flex;
-    align-items:flex-end;
-    gap:5px;
+    justify-content:space-evenly;
 
-    height:100px;
+    opacity:0;
+    transform:translateY(100%);
+    transition:.5s;
 
     z-index:99999;
 }
 
-.bar{
-    width:8px;
-    height:20px;
-
-    background:#ff0088;
-
-    border-radius:20px;
-
-    box-shadow:0 0 10px #ff0088;
+.visualizer.active{
+    opacity:1;
+    transform:translateY(0);
 }
+
+.bar{
+    flex:1;
+    max-width:15px;
+    margin:0 1px;
+
+    background:#fff;
+}
+
+
+
+
+
+
 /* Menu */
 
 nav{
